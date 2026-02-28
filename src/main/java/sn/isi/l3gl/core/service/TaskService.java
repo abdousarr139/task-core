@@ -28,4 +28,11 @@ public class TaskService {
     public List<Task> listTasks() {
         return taskRepository.findAll();
     }
+    // VERSION 0.2.0
+    public Task updateStatus(Long id, TaskStatus newStatus) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tâche introuvable avec l'id : " + id));
+        task.setStatus(newStatus);
+        return taskRepository.save(task);
+    }
 }
